@@ -1,0 +1,9 @@
+{
+    "name": "yehchge/checkurl",
+    "type": "project",
+    "minimum-stability": "stable",
+    "require": {
+        "webignition/url-health-checker": "^1.0",
+        "jwage/easy-csv": "^0.0.5"
+    }
+}
