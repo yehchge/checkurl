@@ -4,18 +4,27 @@
 
 require "vendor/autoload.php";
 
-$oCheck = new \webignition\UrlHealthChecker\UrlHealthChecker();
-$reader = new \EasyCSV\Reader('checkurl.csv');
+$filename = "checkurl.csv";
 
+if(isset($argv[1])){
+    $filename = trim($argv[1]);
+}
+
+$oCheck = new \webignition\UrlHealthChecker\UrlHealthChecker();
+$reader = new \EasyCSV\Reader($filename);
+$writer = new \EasyCSV\Writer('checkurl_'.date("Ymd").'.csv');
+$writer->writeRow('No, Status, Url');
 while($row = $reader->getRow()){
     $data = $oCheck->check($row['url']);
-    echo $row['no'];
+    $msg = $row['no'];
     if($data->getState()==200){
-        echo ",OK";
+        $msg .= ",OK";
     }elseif($data->getState()==404){
-        echo ",ERROR";
+        $msg .= ",ERROR";
     }elseif($data->getState()==6){
-        echo ",BAD";
+        $msg .= ",BAD";
     }
-    echo ",".$row['url']."\r\n";
+    $msg .= ",".$row['url'];
+    echo $msg."\r\n";
+    $writer->writeRow($msg);
 }
