@@ -23,6 +23,8 @@ while($row = $reader->getRow()){
         $msg .= ",ERROR";
     }elseif($data->getState()==6){
         $msg .= ",BAD";
+    }elseif($data->getState()==410){
+        $msg .= ",no available";
     }
     $msg .= ",".$row['url'];
     echo $msg."\r\n";

@@ -4,6 +4,7 @@
     "minimum-stability": "stable",
     "require": {
         "webignition/url-health-checker": "^1.0",
-        "jwage/easy-csv": "^0.0.5"
+        "jwage/easy-csv": "^0.0.5",
+        "nette/database": "^2.4"
     }
 }
